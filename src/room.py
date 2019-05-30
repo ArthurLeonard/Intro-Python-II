@@ -12,6 +12,8 @@ class Room:
 		self.e_to = None
 		self.s_to = None
 		self.w_to = None
+		self.item_list = ['gold', 'wine', 'fire']
+
 	def move_to (self, direction):
 		if direction == "n":
 			return self.n_to
@@ -24,3 +26,15 @@ class Room:
 
 		else:
 			return None
+
+	def remove_item (self, item):
+		if item in self.item_list:
+			self.item_list.remove(item)
+		else: 
+			print(f"{self.name} does not contain {item}\n\n")
+
+	def add_item (self, item):
+		if item not in self.item_list:
+			self.item_list.append(item)
+		else: 
+			print(f"{item} already exists in {self.name}\n\n")

@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -43,6 +44,8 @@ room['treasure'].s_to = room['narrow']
 player1 = Player("tommy", room["outside"])
 print(player1.current_room.name, player1.name)
 
+sword = Item('sword', 'A deadly weapon')
+print(f"__{sword.name}__:  {sword.description}")
 # Write a loop that:
 #
 # * Prints the current room name
@@ -60,6 +63,21 @@ while True:
 		player1.move(cmd)
 	elif cmd == 'q':
 		break
+	elif cmd == 'd':
+		print(f"{player1.current_room.name} has the following items {player1.current_room.item_list}")
+	elif cmd == 'i':
+		print(f"You the following items {player1.item_list}")
+	elif ('get' in cmd or 'take' in cmd):
+		item = cmd.split(" ")[1]
+		print(f"{item}")
+		player1.current_room.remove_item(item)
+		player1.get_item(item)
+
+	elif 'drop' in cmd:
+		print(f"{cmd}")
+		item = cmd.split(" ")[1]
+		player1.current_room.add_item(item)
+		player1.drop_item(item)
 	else:
-		print('Valid choices are n, e, s, w or q to end the game\n') 
+		print('Valid choices are n, e, s, w for moving in a direction, \td for displaying items in the room. \t i for displaying what you are carrying \t get (item) or drop (item) to access items in the room \t or q to end the game\n') 
 
